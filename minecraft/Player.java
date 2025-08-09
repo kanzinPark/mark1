@@ -3,8 +3,11 @@ package minecraft;
 import lombok.Getter;
 import lombok.Setter;
 import minecraft.amor.*;
-import minecraft.weapon.tools.Bow;
-import minecraft.weapon.tools.*;
+import minecraft.mineral.MineralType;
+import minecraft.tools.weapon.*;
+import minecraft.tools.tool.Hoe;
+import minecraft.tools.tool.Pickaxe;
+import minecraft.tools.tool.Tools;
 
 @Getter
 @Setter
@@ -24,11 +27,18 @@ public class Player {
     private Sword sword;
     private Axe axe;
     private Bow bow;
+    private WeaponsMaterials weaponsMaterials;
 
     //도구
     private Hoe hoe;
     private Pickaxe pickaxe;
     private int arrowCount;
+
+    public Player(String name, int baseDefense, int atk) {
+        this.name = name;
+        this.baseDefense = baseDefense;
+        this.atk = atk;
+    }
 
     //방어구
     public void equipArmor(Equipment equipment) {
@@ -53,34 +63,39 @@ public class Player {
         return total;
     }
 
-    //무기 및 도구
+    //도구
     public void equipTools(Tools tools) {
-        if (tools instanceof Sword) {
-            this.sword = (Sword) tools;
-        } else if (tools instanceof Axe) {
-            this.axe = (Axe) tools;
-        } else if (tools instanceof Hoe) {
+        if (tools instanceof Hoe) {
             this.hoe = (Hoe) tools;
         } else if (tools instanceof Pickaxe) {
             this.pickaxe = (Pickaxe) tools;
         }
     }
 
-    //도구 공격력 증가 및 감소
-    public int getTotalAtk(Tools tools) {
-        if (tools instanceof Sword) {
-            return this.sword.getAtk();
-        } else if (tools instanceof Axe) {
-            return this.axe.getAtk();
+    //무기
+    public void equipWeapons(Weapons weapons) {
+        if (weapons instanceof Sword) {
+            this.sword = (Sword) weapons;
+        } else if (weapons instanceof Axe) {
+            this.axe = (Axe) weapons;
+        }
+    }
+
+    //공격력 증가 및 감소
+    public int getTotalAtk(Weapons weapons) {
+        if (weapons instanceof Sword) {
+            return this.weaponsMaterials.getAtk();
+        } else if (weapons instanceof Axe) {
+            return this.weaponsMaterials.getAtk();
         } else {
             return atk;
         }
     }
 
     //활
-    public int getBowAtk(Tools tools) {
-        if (tools instanceof Bow && arrowCount != 0) {
-            return this.bow.getAtk();
+    public int getBowAtk(Weapons weapons) {
+        if (weapons instanceof Bow && arrowCount != 0) {
+            return this.weaponsMaterials.getAtkBow();
         }
         return 0;
     }
@@ -102,17 +117,7 @@ public class Player {
         return false;
     }
 
-    public void mine() {
-        System.out.println("캡니다");
-    }
-
-    public boolean place() {
+    public boolean mine(MineralType mineralType) {
         return false;
-    }
-
-    public Player(String name, int baseDefense, int atk) {
-        this.name = name;
-        this.baseDefense = baseDefense;
-        this.atk = atk;
     }
 }

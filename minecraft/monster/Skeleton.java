@@ -2,7 +2,7 @@ package minecraft.monster;
 
 import minecraft.Weather;
 
-public class Skeleton extends Monster implements AbstractMonster {
+public class Skeleton extends Monster {
 
     Weather weather = new Weather();
 

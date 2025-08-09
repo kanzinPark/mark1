@@ -2,7 +2,7 @@ package minecraft.monster;
 
 import minecraft.Weather;
 
-public class Spider extends Monster implements AbstractMonster {
+public class Spider extends Monster {
 
     Weather weather = new Weather();
 
@@ -21,6 +21,7 @@ public class Spider extends Monster implements AbstractMonster {
         System.out.println("사람을 향해 옵니다");
     }
 
+    @Override
     public boolean die() {
         dropItems();
         return false;

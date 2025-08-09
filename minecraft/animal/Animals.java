@@ -1,12 +1,21 @@
 package minecraft.animal;
 
-public class Animals {
+public abstract class Animals {
 
     private boolean isFull;
 
     public void move() {
         System.out.println("움직입니다");
     }
+
+    public void sound() {
+        System.out.println("울음소리");
+    }
+
+    public void eat() {
+        System.out.println("냠");
+    }
+
 
     public boolean die() {
         return true;

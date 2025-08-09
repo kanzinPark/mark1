@@ -1,5 +1,9 @@
 package minecraft.mineral;
 
-public class Minerals {
+import lombok.Getter;
 
+@Getter
+public abstract class Minerals {
+
+    public abstract void dropMinerals();
 }
